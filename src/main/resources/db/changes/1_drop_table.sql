@@ -1,0 +1,15 @@
+drop table if exists meeting;
+drop table if exists person;
+drop table if exists departure_reason;
+drop table if exists doctor;
+drop table if exists education_level;
+drop table if exists emergency_contact;
+drop table if exists followed_by;
+drop table if exists other_person;
+drop table if exists person;
+drop table if exists reference;
+drop table if exists residence_type;
+drop table if exists sector;
+drop table if exists status;
+drop table if exists users;
+drop table if exists work_city;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("api/users")
 public class UserController {
@@ -39,10 +39,9 @@ public class UserController {
     return s.orElseThrow(()-> new RuntimeException("Aucun utilisateurs"));
   }
 
-  @GetMapping(path = "/verifySignin/{username}/{password}")
-  public User verifySignin(@PathVariable("username")  String username, @PathVariable("password")  String password){
-    Optional<User> s =userService.getSigninUser(username,password);
-    return s.orElseThrow(()-> new RuntimeException("Aucun utilisateurs"));
+  @GetMapping(path = "/getUserFromName/{username}")
+  public Optional<User> verifySignin(@PathVariable("username")  String username){
+    return userService.getSigninUser(username);
   }
 
   @GetMapping(path = "/getAll")
@@ -95,8 +94,8 @@ public class UserController {
 
   @PostMapping(path = "/resetPassword")
   public int resetPassword(@RequestBody User user){
-    var passwordBeforeHash = user.getPassword();
-    var resetPassword =  userService.resetPasswordUSer(user.getId(),user.getPassword());
+    String passwordBeforeHash = user.getPassword();
+    int resetPassword =  userService.resetPasswordUSer(user.getId(),user.getPassword());
     if(resetPassword == 1){
       try {
         notificationService.sendResetPasswordMail(user.getEmail(), user.getUsername(), passwordBeforeHash, user.getFname(), user.getLname());

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import ca.uqtr.dmi.inf1013.repos.UserRepo;
+import ca.uqtr.dmi.inf1013.services.StatusService;
 import ca.uqtr.dmi.inf1013.services.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,53 +23,6 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepo userRepo){
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> optionalUser = userRepo.findByUsername(username);
-        User user = optionalUser
-                .orElseThrow(()-> new UsernameNotFoundException(String.format("Étudiant non trouvé")));
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-
-        return new UserDetails() {
-            @Override
-            public Collection<? extends GrantedAuthority> getAuthorities() {
-                return null;
-            }
-
-            @Override
-            public String getPassword() {
-                return user.getPassword();
-            }
-
-            @Override
-            public String getUsername() {
-                return user.getUsername();
-            }
-
-            @Override
-            public boolean isAccountNonExpired() {
-                return true;
-            }
-
-            @Override
-            public boolean isAccountNonLocked() {
-                return true;
-            }
-
-            @Override
-            public boolean isCredentialsNonExpired() {
-                return true;
-            }
-
-            @Override
-            public boolean isEnabled() {
-                return true;
-            }
-        };
     }
 
     @Override
@@ -101,29 +55,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getSigninUser(String username, String password) {
-       String oldPassword = password;
-      //  password = this.passwordEncoder.encode(password);
-       // System.out.println(passwordEncoder.matches(oldPassword, password));
-       // return this.userRepo.findByUsernameAndPassword(username, password);
-         Optional<User> optionalUser =  this.userRepo.findByUsername("polo");
-        System.out.println("user");
-        System.out.println(optionalUser);
-        User user = optionalUser
-                .orElseThrow(()-> new UsernameNotFoundException(String.format("Le nom ou le mot de passe est invalide.")));
+    public Optional<User> getSigninUser(String username) {
 
-            System.out.println("password : ");
-        System.out.println(password);
-        System.out.println(user.getPassword());
-        System.out.println(passwordEncoder.matches(password,user.getPassword()));
-        if(passwordEncoder.matches(password,user.getPassword())) {
-            return Optional.of(user);
-        }
-        else{
-            new UsernameNotFoundException(String.format("Le nom ou le mot de passe est invalide."));
-        }
-
-        return null;
+        Optional<User> optionalUser = this.userRepo.findByUsername(username);
+        return optionalUser;
     }
 
     @Override

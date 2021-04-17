@@ -6,14 +6,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserService extends UserDetailsService {
+public interface UserService{
 
   Optional<User> getUser(Long id);
   Optional <List<User>> getActiveUsers();
   User addUser(User user);
   int editUser(User user);
   int activeDesactiveUser(Long id, Boolean activeDesactive);
-  Optional<User> getSigninUser(String username, String password);
+  Optional<User> getSigninUser(String username);
   long verifyUserExist(String username);
   Optional<String> getUserFullNameFromId(Long id);
   int editPassword(Long id, String password);

@@ -1,13 +1,13 @@
 package ca.uqtr.dmi.inf1013.jwt;
 
 import com.google.common.net.HttpHeaders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Configuration;
 
 import javax.crypto.SecretKey;
-
-@Service // Pas sur, c'étais pas dans la vidéo
+@Configuration
 @ConfigurationProperties(prefix = "application.jwt")
 public class JwtConfig {
 
@@ -15,8 +15,7 @@ public class JwtConfig {
     private String tokenPrefix;
     private Integer tokenExpirationAfterDays;
 
-    public JwtConfig(){
-
+    public JwtConfig() {
     }
 
     public String getSecretKey() {
@@ -35,15 +34,15 @@ public class JwtConfig {
         this.tokenPrefix = tokenPrefix;
     }
 
-    public Integer getTokenExpirationAfterDAys() {
+    public Integer getTokenExpirationAfterDays() {
         return tokenExpirationAfterDays;
     }
 
-    public void setTokenExpirationAfterDAys(Integer tokenExpirationAfterDAys) {
-        this.tokenExpirationAfterDays = tokenExpirationAfterDAys;
+    public void setTokenExpirationAfterDays(Integer tokenExpirationAfterDays) {
+        this.tokenExpirationAfterDays = tokenExpirationAfterDays;
     }
 
-    public String getAuthorizationHeader(){
+    public String getAuthorizationHeader() {
         return HttpHeaders.AUTHORIZATION;
     }
 }

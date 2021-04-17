@@ -74,7 +74,7 @@ public interface UserRepo extends CrudRepository<User,Long> {
   @Transactional
   int updatePasswordUser(Long id, String password);
 
-  @Query(value = "update users set first_connexion = true where id = ?1", nativeQuery = true) //native = true, requête avec les tables de la BD
+  @Query(value = "update users set first_connexion = false where id = ?1", nativeQuery = true) //native = true, requête avec les tables de la BD
   @Modifying // Obligatoire quand on fait un update
   @Transactional
   int skipFirstConnexionStep(Long id);
