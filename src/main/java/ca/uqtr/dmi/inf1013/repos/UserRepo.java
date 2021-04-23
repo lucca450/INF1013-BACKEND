@@ -69,7 +69,7 @@ public interface UserRepo extends CrudRepository<User,Long> {
   @Query(value = "select fname ||' '||lname as fullName from users where id = ?1", nativeQuery = true)
   Optional<String> getFullNameById(Long id);
 
-  @Query(value = "update users set password = ?2, first_connexion = true where id = ?1", nativeQuery = true) //native = true, requête avec les tables de la BD
+  @Query(value = "update users set password = ?2, first_connexion = false where id = ?1", nativeQuery = true) //native = true, requête avec les tables de la BD
   @Modifying // Obligatoire quand on fait un update
   @Transactional
   int updatePasswordUser(Long id, String password);

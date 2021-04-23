@@ -1,8 +1,30 @@
+delete from meeting;
+delete from person;
+delete from followed_by;
+delete from emergency_contact;
+delete from users;
+
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
+UPDATE users SET id = DEFAULT;
+
+ALTER SEQUENCE meeting_id_seq RESTART WITH 1;
+UPDATE meeting SET id = DEFAULT;
+
+ALTER SEQUENCE person_id_seq RESTART WITH 1;
+UPDATE person SET id = DEFAULT;
+
+ALTER SEQUENCE followed_by_id_seq RESTART WITH 1;
+UPDATE followed_by SET id = DEFAULT;
+
+ALTER SEQUENCE emergency_contact_id_seq RESTART WITH 1;
+UPDATE emergency_contact SET id = DEFAULT;
+
+
 
 insert into users values(nextval('users_id_seq'),'Users','Dubois-Nadeau','Pierre-olivier','pierro_kool@hotmail.com','8199959353','355 rue d''adrano',null,'polo','$2a$10$zj88Ey.Qp5mm/pMABrY3j.rvYN6HDTrY2G0SZdY/DOKd6zGN3G0Oq','A',true,true);
-insert into users values(nextval('users_id_seq'),'User','Bellemare','Vincent','pierro_kool@hotmail.com','8199132020','321 rue bellevin',null,'madbrother','$2a$10$gSSOEgt6rZbrB46DAklrRuf8oX4Ia4/EaXkdDPlc/kzKBNXNWllBq','I',true,true);
-insert into users values(nextval('users_id_seq'),'User','Possa Silva','Lucca','pierro_kool@hotmail.com','8196932092','320 rue des roses',null,'luca','$2a$10$pZuB9112GtYJeWdd1jz5VegWzd9CdsVBgrNv2xkhEHsgY1JzEjAfq','A',true,true);
-insert into users values(nextval('users_id_seq'),'User','Lajoie','Émile','pierro_kool@hotmail.com','8196932095','350 rue de la joie',null,'Ender','$2a$10$iGbHP64AI4N6tJad0ak3RO3LAaxYXvU17wFkVQtljyi1jwxYW9Eky','I',false,true);
+insert into users values(nextval('users_id_seq'),'User','Bellemare','Vincent','pierro_kool@hotmail.com','8199132020','321 rue bellevin',null,'madbrother','$2a$10$ZaEbZtetnRRMNduiioI8JOXmTltdwTFwURN5r98PVfIYeIJgCp6r2','I',true,true);
+insert into users values(nextval('users_id_seq'),'User','Possa Silva','Lucca','pierro_kool@hotmail.com','8196932092','320 rue des roses',null,'luca','$2a$10$/hz6FUd3LgjDaOhxW1N.8O9M06REksGfzrrFVU2afskzrv4qiaWoq','A',true,true);
+insert into users values(nextval('users_id_seq'),'User','Lajoie','Émile','pierro_kool@hotmail.com','8196932095','350 rue de la joie',null,'Ender','$2a$10$eLhXD2hL7kQoHTW6wgnUA.fpWU9vUG1ZRkWdHYcYPSkQ27tHCnbRG','I',false,true);
 
 insert into emergency_contact values(nextval('emergency_contact_id_seq'),null,'Smith','John','8190002222','Frère');
 insert into emergency_contact values(nextval('emergency_contact_id_seq'),null,'Smith','Elisabeth','8190002222','Soeur');
